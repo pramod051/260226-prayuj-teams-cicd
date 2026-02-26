@@ -1,0 +1,42 @@
+# .gitignore additions for AWS deployment
+
+# Node modules
+node_modules/
+
+# Environment files
+.env
+.env.production
+*.pem
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Uploads
+uploads/
+
+# Terraform
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/tfplan
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/terraform.tfvars
+
+# AWS
+.aws/
+*.key
+aws-credentials.txt
+terraform-outputs.txt
+
+# Jenkins
+jenkins/secrets/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

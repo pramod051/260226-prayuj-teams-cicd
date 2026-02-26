@@ -1,0 +1,30 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'ecs-backend'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 5000
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        regex: '.*backend.*'
+        action: keep
+
+  - job_name: 'ecs-frontend'
+    ec2_sd_configs:
+      - region: us-east-1
+        port: 80
+    relabel_configs:
+      - source_labels: [__meta_ec2_tag_Name]
+        regex: '.*frontend.*'
+        action: keep
+
+  - job_name: 'documentdb'
+    static_configs:
+      - targets: ['<DOCUMENTDB_ENDPOINT>:27017']
